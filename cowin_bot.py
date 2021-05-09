@@ -1,4 +1,4 @@
-from keep_alive import keep_alive
+#from keep_alive import keep_alive
 import requests
 import json
 import time
@@ -32,7 +32,13 @@ from email.mime.text import MIMEText
 
 db_name = "center.db"
 table="already_send"
-check_date = [9,10,11,12]
+check_date = [10,11,12,13,14,15]
+
+
+email_wait=0.5
+
+wait_time=20
+wait_time_2=30
 
 
 def create_database(db_file):
@@ -146,7 +152,7 @@ def send_mail(one_center,checkDate):
     fromaddr = "rsachannel11@gmail.com"
 
     #people to send
-    toaddr = ["prathameshvhanmane@gmail.com","rohanarora1313@gmail.com","rihit555@digdig.org","amitarora399@gmail.com","karandikarshreyash@gmail.com","Barcelonapratik@gmail.com","saurabhvirola@gmail.com",""]
+    toaddr = ["prathameshvhanmane@gmail.com","adityakashyap937@gmail.com","workdivij@gmail.com","rohanarora1313@gmail.com","rihit555@digdig.org","amitarora399@gmail.com","karandikarshreyash@gmail.com","Barcelonapratik@gmail.com","saurabhvirola@gmail.com",""]
 
     #dropped_df=final_df.drop(['State'], axis=1)
 
@@ -171,7 +177,7 @@ def send_mail(one_center,checkDate):
             text = msg.as_string()
             s.sendmail(fromaddr, dest, text)
             s.quit()
-            time.sleep(2)
+            time.sleep(email_wait)
         except:
             print('mail sent failed to '+str(dest))
             pass
@@ -242,7 +248,7 @@ def send_error_message(info):
             text = msg.as_string()
             s.sendmail(fromaddr, dest, text)
             s.quit()
-            time.sleep(2)
+            time.sleep(email_wait)
         except:
             print('mail sent failed')
             pass
@@ -258,7 +264,7 @@ def call_api(checkDate):
     "Origin":"https://selfregistration.cowin.gov.in",
     "Connection":"keep-alive",
     "Referer":"https://selfregistration.cowin.gov.in/",
-    "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiI3OWE4YzJhOC1hMjU1LTRhNjktYTQ5Yi0yYjk0NzQ3NDVhYTEiLCJ1c2VyX2lkIjoiNzlhOGMyYTgtYTI1NS00YTY5LWE0OWItMmI5NDc0NzQ1YWExIiwidXNlcl90eXBlIjoiQkVORUZJQ0lBUlkiLCJtb2JpbGVfbnVtYmVyIjo5MDI5OTk1MTc4LCJiZW5lZmljaWFyeV9yZWZlcmVuY2VfaWQiOjU1OTc3ODAwNTIzOTQwLCJzZWNyZXRfa2V5IjoiYjVjYWIxNjctNzk3Ny00ZGYxLTgwMjctYTYzYWExNDRmMDRlIiwidWEiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0OyBydjo4OC4wKSBHZWNrby8yMDEwMDEwMSBGaXJlZm94Lzg4LjAiLCJkYXRlX21vZGlmaWVkIjoiMjAyMS0wNS0wOFQxODo0NjoxMC41MzNaIiwiaWF0IjoxNjIwNDk5NTcwLCJleHAiOjE2MjA1MDA0NzB9.hbBEbYy8xn7Kmbsy2I6Gl_SyYMQHqnNSUWTVlVGC_Kk"
+    "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiI3OWE4YzJhOC1hMjU1LTRhNjktYTQ5Yi0yYjk0NzQ3NDVhYTEiLCJ1c2VyX2lkIjoiNzlhOGMyYTgtYTI1NS00YTY5LWE0OWItMmI5NDc0NzQ1YWExIiwidXNlcl90eXBlIjoiQkVORUZJQ0lBUlkiLCJtb2JpbGVfbnVtYmVyIjo5MDI5OTk1MTc4LCJiZW5lZmljaWFyeV9yZWZlcmVuY2VfaWQiOjU1OTc3ODAwNTIzOTQwLCJzZWNyZXRfa2V5IjoiYjVjYWIxNjctNzk3Ny00ZGYxLTgwMjctYTYzYWExNDRmMDRlIiwidWEiOiJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0OyBydjo4OC4wKSBHZWNrby8yMDEwMDEwMSBGaXJlZm94Lzg4LjAiLCJkYXRlX21vZGlmaWVkIjoiMjAyMS0wNS0wOVQxMTozNjo1My4yNzdaIiwiaWF0IjoxNjIwNTYwMjEzLCJleHAiOjE2MjA1NjExMTN9.4GI9qohuOtepIXzuaIn6jIXcS5xvLwijmp05DwA0LH8"
     })
 
     print(resp.url)
@@ -268,7 +274,7 @@ def call_api(checkDate):
         # retry after 5 mins and send message
         if(resp.status_code != 401):
             send_error_message('GET /tasks/ {} date={}'.format(resp.status_code,checkDate))
-            time.sleep(100)
+            time.sleep(wait_time)
             check_API()
         
     else:
@@ -284,7 +290,7 @@ def check_API():
         call_api(date)
         #todo remove 
 
-    time.sleep(random.randint(100,150))
+    time.sleep(random.randint(wait_time,wait_time_2))
     check_API()
 
 
@@ -296,38 +302,39 @@ def centerLoop(full_list,checkDate):
 
     center_dict_list = full_list.get('centers')
 
-    # loop
-    for one_center in center_dict_list:
-        print('checking center')
-        #print(one_center)
+    if center_dict_list != None:
+        # loop
+        for one_center in center_dict_list:
+            print('checking center')
+            #print(one_center)
 
-        #print(one_center['center_id'])
+            #print(one_center['center_id'])
 
-        session = one_center['sessions']
-        " Free or Paid "
-        money = one_center['fee_type']
-        isFree = False
-        if(money.lower() == "free"):
-            isFree = True
-        else:
+            session = one_center['sessions']
+            " Free or Paid "
+            money = one_center['fee_type']
             isFree = False
+            if(money.lower() == "free"):
+                isFree = True
+            else:
+                isFree = False
 
-        session_dict = session[0]
+            session_dict = session[0]
 
-        # 'available_capacity': 0, 'min_age_limit': 45
+            # 'available_capacity': 0, 'min_age_limit': 45
 
-        available =  session_dict['available_capacity']
-        age = session_dict['min_age_limit']
+            available =  session_dict['available_capacity']
+            age = session_dict['min_age_limit']
 
-        #checking avaiable and sending message etc
+            #checking avaiable and sending message etc
 
-        if available > 0 and age <=18:
-            print('vaccine avaiable')
-            print('ae'+str(age))
-            send_message(age,isFree,one_center,checkDate)
-            #todo remove
-        else:
-            print('not found')
+            if available > 0 and age <=18:
+                print('vaccine avaiable')
+                print('ae'+str(age))
+                send_message(age,isFree,one_center,checkDate)
+                #todo remove
+            else:
+                print('not found')
 
 #send_mail('','')
 
