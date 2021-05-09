@@ -332,6 +332,7 @@ def centerLoop(full_list,checkDate):
 #send_mail('','')
 checkDBandTable()
 check_API()
+send_error_message('Bot Started ....')
 
 # if resp.status_code != 200:
 #     # This means something went wrong.
