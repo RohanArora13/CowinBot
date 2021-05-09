@@ -149,7 +149,7 @@ def send_mail(one_center,checkDate):
     fromaddr = "rsachannel11@gmail.com"
 
     #people to send
-    toaddr = ["prathameshvhanmane@gmail.com","rohanarora1313@gmail.com","rihit555@digdig.org","amitarora399@gmail.com","karandikarshreyash@gmail.com","Barcelonapratik@gmail.com","saurabhvirola@gmail.com",""]
+    toaddr = ["workdivij@gmail.com","prathameshvhanmane@gmail.com","rohanarora1313@gmail.com","rihit555@digdig.org","amitarora399@gmail.com","karandikarshreyash@gmail.com","Barcelonapratik@gmail.com","saurabhvirola@gmail.com",""]
 
     #dropped_df=final_df.drop(['State'], axis=1)
 
