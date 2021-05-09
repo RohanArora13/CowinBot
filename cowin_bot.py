@@ -32,8 +32,11 @@ from email.mime.text import MIMEText
 
 db_name = "center.db"
 table="already_send"
-check_date = [9,10,11,12]
-
+# Dynamically setting API to check Centers for next 4 days 
+check_date = []
+dt = int(str(datetime.date.today())[-2:])
+for i in range(4):
+    check_date.append(dt+i)
 
 def create_database(db_file):
     """ create a database connection to a SQLite database """
