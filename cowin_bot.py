@@ -1,4 +1,4 @@
-
+from keep_alive import keep_alive
 import requests
 import json
 import time
@@ -330,9 +330,13 @@ def centerLoop(full_list,checkDate):
             print('not found')
 
 #send_mail('','')
+
+#keep_alive()
+
 checkDBandTable()
 check_API()
-send_error_message('Bot Started ....')
+#send_error_message('Bot Started ....')
+
 
 # if resp.status_code != 200:
 #     # This means something went wrong.
